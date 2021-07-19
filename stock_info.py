@@ -1,18 +1,18 @@
 import yfinance as yf
 
-start = '2000-01-01'
-end = '2000-01-05'
 
-df_yahoo = yf.download('AAPL', start=start, end=end, progress=False).to_dict()
-dict_stock_info = {stock_info: {str(date.to_pydatetime().date()): value for date, value in dict_info.items()}
-                   for stock_info, dict_info in df_yahoo.items()}
+def stock_info(ticker, start, end, only=None):
+    if only is None:
+        df_yahoo = yf.download(ticker, start=start, end=end, progress=False).to_dict()
+        dict_stock_info = {stock_info: {str(date.to_pydatetime().date()): value for date, value in dict_info.items()}
+                           for stock_info, dict_info in df_yahoo.items()}
+        return dict_stock_info
+    else:
+        df_yahoo = yf.download(ticker, start=start, end=end, progress=False).to_dict()
+        dict_stock_info = {info_stock: {str(date.to_pydatetime().date()): value for date, value in dict_info.items()}
+                           for info_stock, dict_info in df_yahoo.items()}
+        return {only: dict_stock_info[only]}
 
-print(df_yahoo)
-print(type(df_yahoo))
 
-print("------------")
-print(dict_stock_info)
+print(stock_info('AAPL', start='2000-01-01', end='2000-01-05', only='Open'))
 
-# def stock_info(ticker, start, end, only=False):
-
-# .to_pydatetime()
