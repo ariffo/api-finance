@@ -25,3 +25,7 @@ def stock_info(ticker, start, end, only=None):
     else:
         return {"message": "Specific information key is invalid. Only 'Open', 'Close', 'High', "
                            "'Low', 'Adj Close' and 'Volume' are accepted!"}
+
+
+
+print(bool(stock_info('v', start='2000-01-01', end='2000-01-05', only='close')['Close']))
