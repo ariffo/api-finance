@@ -12,5 +12,6 @@ def today(ticker):
     if ticker_valido(ticker):
         currently_price = yf.Ticker(ticker).history(period='1d')['Close'][0]
         return {'Currently Price': currently_price}
+
     else:
         return {'message': 'Error, ticker no valid. Only available Dow Jones tickers'}

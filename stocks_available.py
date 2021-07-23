@@ -35,7 +35,14 @@ class Shares(Enum):
 
 
 def ticker_valido(ticker):
+    """
+    Function that tells us if the stock belongs to the Dow Jones
+    :param ticker: Stock symbol. Example -> Visa-ticker=V, 3M-company-ticker=MMM
+    :return: True if stock belongs to the Down Jones, False if not.
+    """
+
     if ticker.upper() in [share.name for share in Shares]:
         return True
+
     else:
         return False
