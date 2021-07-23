@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from stock_info import stock_info
+from today import today
 
 app = Flask(__name__)
 
@@ -51,6 +52,11 @@ def volume_stock_info(name):
     data_request = request.get_json()
     dict_info = stock_info(name, data_request['start'], data_request['end'], only='volume')
     return jsonify(dict_info)
+
+
+@app.route('/<string:name>/today')
+def today_price(name):
+    return jsonify(today(name))
 
 
 app.run(port=6787)

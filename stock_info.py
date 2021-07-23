@@ -12,6 +12,14 @@ class SpecificInfo(Enum):
 
 
 def stock_info(ticker, start, end, only=None):
+    """
+    Function that brings us information about the prices and volume traded of a stock
+    :param ticker: Stock symbol. Example -> Visa-ticker=V, 3M-company-ticker=MMM
+    :param start: Starting date of desire data
+    :param end: Ending date of desire data
+    :param only: If we only want a specific data
+    :return: Dictionary with info
+    """
     if only is None:
         df_yahoo = yf.download(ticker, start=start, end=end, progress=False).to_dict()
         dict_stock_info = {info_stock: {str(date.to_pydatetime().date()): value for date, value in dict_info.items()}
@@ -25,7 +33,3 @@ def stock_info(ticker, start, end, only=None):
     else:
         return {"message": "Specific information key is invalid. Only 'Open', 'Close', 'High', "
                            "'Low', 'Adj Close' and 'Volume' are accepted!"}
-
-
-
-print(bool(stock_info('v', start='2000-01-01', end='2000-01-05', only='close')['Close']))
