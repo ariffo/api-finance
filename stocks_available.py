@@ -34,7 +34,7 @@ class Shares(Enum):
     DIS = 'Walt Disney'
 
 
-def ticker_valido(ticker):
+def ticker_valido(ticker: str) -> bool:
     if ticker.upper() in [share.name for share in Shares]:
         return True
     else:
